@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Project</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Add Project</h1>
+            <form action="/projects/add" method="POST">
+                <div class="field">
+                    <label class="label">Project Name</label>
+                    <div class="control">
+                        <input class="input" type="text" name="project_name" placeholder="Enter project name" required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Project Description</label>
+                    <div class="control">
+                        <textarea class="textarea" name="project_description" placeholder="Enter project description" required></textarea>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Billing Option</label>
+                    <div class="control">
+                        <div class="select">
+                            <select name="billing_option">
+                                <option value="fixed_rate">Fixed Rate</option>
+                                <option value="time_and_material">Time and Material</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button class="button is-link" type="submit">Submit</button>
+                    </div>
+                    <div class="control">
+                        <button class="button is-link is-light" type="reset">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+</html>
