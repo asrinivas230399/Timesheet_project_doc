@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My App{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            font-size: 16px; /* Base font size */
+        }
+        .desktop {
+            background-color: lightblue;
+        }
+        .mobile {
+            background-color: lightgreen;
+        }
+        .tablet {
+            background-color: lightcoral;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+        }
+        /* Media Queries for Responsive Design */
+        @media (max-width: 600px) {
+            body {
+                background-color: lightgreen;
+                font-size: 14px; /* Smaller font size for mobile */
+            }
+        }
+        @media (min-width: 601px) and (max-width: 1024px) {
+            body {
+                background-color: lightcoral;
+                font-size: 15px; /* Medium font size for tablets */
+            }
+        }
+        @media (min-width: 1025px) {
+            body {
+                background-color: lightblue;
+                font-size: 16px; /* Default font size for desktops */
+            }
+        }
+    </style>
+    {% block head %}{% endblock %}
+</head>
+<body class="{{ device_type }}">
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // JavaScript to detect device type and adjust UI components
+        document.addEventListener('DOMContentLoaded', function() {
+            var userAgent = navigator.userAgent.toLowerCase();
+            var bodyClass = 'desktop';
+
+            if (userAgent.includes('mobile')) {
+                bodyClass = 'mobile';
+            } else if (userAgent.includes('tablet')) {
+                bodyClass = 'tablet';
+            }
+
+            document.body.classList.add(bodyClass);
+        });
+    </script>
+</body>
+</html>

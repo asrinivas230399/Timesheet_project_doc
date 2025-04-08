@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Updates</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .desktop {
+            background-color: lightblue;
+        }
+        .mobile {
+            background-color: lightgreen;
+        }
+        .tablet {
+            background-color: lightcoral;
+        }
+        .task {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body class="{{ device_type }}">
+    <h1>Task Updates</h1>
+    {% if tasks %}
+        {% for task in tasks %}
+        <div class="task">
+            <p>Task: {{ task.name }}</p>
+            <p>Status: {{ task.status }}</p>
+            <form action="/task/update" method="post">
+                <input type="hidden" name="task_id" value="{{ task.id }}">
+                <label for="status">Update Status:</label>
+                <select name="status" id="status">
+                    <option value="Pending">Pending</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                </select>
+                <button type="submit">Update</button>
+            </form>
+        </div>
+        {% endfor %}
+    {% else %}
+    <p>No task updates available.</p>
+    {% endif %}
+</body>
+</html>

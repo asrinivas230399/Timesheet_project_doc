@@ -2,7 +2,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from middleware.responsive_design_middleware import ResponsiveDesignMiddleware
-import uvicorn
 
 app = FastAPI()
 
@@ -32,6 +31,3 @@ async def get_project_details():
 @app.get("/task")
 async def get_task_updates():
     return {"task": "Update routing", "status": "Completed"}
-
-if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8000)

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .desktop {
+            background-color: lightblue;
+        }
+        .mobile {
+            background-color: lightgreen;
+        }
+        .tablet {
+            background-color: lightcoral;
+        }
+    </style>
+</head>
+<body class="{{ device_type }}">
+    <h1>Project Details</h1>
+    <p>Project: {{ project.name }}</p>
+    <p>Version: {{ project.version }}</p>
+</body>
+</html>

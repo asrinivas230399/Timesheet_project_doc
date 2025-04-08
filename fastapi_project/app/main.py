@@ -1,8 +1,8 @@
-from fastapi import FastAPI, Request, Depends, Form, HTTPException
+from fastapi import FastAPI, Request, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import HTMLResponse
 from sqlalchemy.orm import Session
 from app.middleware.responsive_design_middleware import ResponsiveDesignMiddleware
 from app.database import SessionLocal, engine
@@ -44,21 +44,11 @@ async def read_root(request: Request):
 @app.get("/project", response_class=HTMLResponse)
 async def get_project_details(request: Request, db: Session = Depends(get_db)):
     project = crud.get_project(db)
-    if not project:
-        raise HTTPException(status_code=404, detail="Project not found")
     return templates.TemplateResponse("project_details.html", {"request": request, "device_type": request.headers.get('X-Device-Type', 'desktop'), "project": project})
 
-@app.get("/task", response_class=HTMLResponse)
-async def get_task_updates(request: Request, db: Session = Depends(get_db)):
-    tasks = crud.get_tasks(db)
-    return templates.TemplateResponse("task_updates.html", {"request": request, "device_type": request.headers.get('X-Device-Type', 'desktop'), "tasks": tasks})
-
-@app.post("/task/update")
-async def update_task(task_id: int = Form(...), status: str = Form(...), db: Session = Depends(get_db)):
-    task = crud.update_task_status(db, task_id, status)
-    if not task:
-        raise HTTPException(status_code=404, detail="Task not found")
-    return RedirectResponse(url="/task", status_code=303)
+@app.get("/task")
+async def get_task_updates():
+    return {"task": "Update routing", "status": "Completed"}
 
 if __name__ == "__main__":
     import uvicorn
